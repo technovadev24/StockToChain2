@@ -158,6 +158,9 @@ contract StockToChain2 is ERC20, Ownable, Pausable, ReentrancyGuard {
             isInInvestorList[msg.sender] = true;
         }
 
+        // Transfer POL to the distillery (owner)
+        payable(owner()).transfer(priceInPol);
+
         // Refund excess POL
         if (msg.value > priceInPol) {
             payable(msg.sender).transfer(msg.value - priceInPol);
